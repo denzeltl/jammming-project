@@ -19,7 +19,7 @@ const App = () => {
             <div className="App">
                 <SearchBar />
                 <div className="App-playlist">
-                    <SearchResults searchResults={searchResults} />
+                    <SearchResults searchResults={[searchResults]} />
                     <Playlist />
                 </div>
             </div>
