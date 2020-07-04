@@ -10,19 +10,29 @@ const App = () => {
         { name: 'Light', artist: 'San Holo', album: 'album1', id: 2 },
         { name: 'Animals', artist: 'Garrix', album: 'Voices', id: 3 },
     ]);
-    const [playlistName, setPlaylistName] = useState('');
     const [playlistTracks, setPlaylistTracks] = useState([
         { name: 'Crash', artist: 'Illenium', album: '0034', id: 4 },
         { name: 'Dark Skies', artist: 'Afrojack', album: 'Play', id: 5 },
         { name: 'High Dynasty', artist: 'Denzel Lester', album: 'Hard', id: 6 },
     ]);
+    const [playlistName, setPlaylistName] = useState('New Playlist');
 
-    const addTrack = (track) => {
-        if (playlistTracks.find((savedSong) => savedSong === track.id)) {
-            return;
-        } else {
-            setPlaylistTracks(playlistTracks.push(track.id));
-        }
+    const onButtonClick = {
+        addTrack(track) {
+            if (playlistTracks.find((savedSong) => savedSong.id === track.id)) {
+                // TODO: SONG ALREADY IN YOUR PLAYLIST
+                return;
+            } else {
+                setPlaylistTracks([...playlistTracks, track]);
+            }
+        },
+        removeTrack(track) {
+            // TODO: DO YOU WANT TO REMOVE SONG FROM PLAYLIST?
+            setPlaylistTracks(playlistTracks.filter((song) => song.id !== track.id));
+        },
+    };
+    const updatePlaylistName = (name) => {
+        setPlaylistName(name);
     };
 
     return (
@@ -34,8 +44,8 @@ const App = () => {
                 <div className="App">
                     <SearchBar />
                     <div className="App-playlist">
-                        <SearchResults searchResults={searchResults} onAdd={addTrack} />
-                        <Playlist playlistTracks={playlistTracks} onAdd={addTrack} />
+                        <SearchResults searchResults={searchResults} onButtonClick={onButtonClick} />
+                        <Playlist playlistTracks={playlistTracks} onButtonClick={onButtonClick} playlistName={playlistName} onNameChange={updatePlaylistName} />
                     </div>
                 </div>
             </div>
