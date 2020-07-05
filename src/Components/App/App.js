@@ -16,6 +16,7 @@ const App = () => {
         { name: 'High Dynasty', artist: 'Denzel Lester', album: 'Hard', id: 6 },
     ]);
     const [playlistName, setPlaylistName] = useState('New Playlist');
+    const [searchBarTerm, setSearchBarTerm] = useState('');
 
     const onButtonClick = {
         addTrack(track) {
@@ -34,6 +35,15 @@ const App = () => {
     const updatePlaylistName = (name) => {
         setPlaylistName(name);
     };
+    const savePlaylist = () => {
+        const trackURIs = playlistTracks;
+    };
+    const searchSpotify = (search) => {
+        console.log(search);
+    };
+    const updateSearchBarTerm = (name) => {
+        setSearchBarTerm(name);
+    };
 
     return (
         <div>
@@ -42,10 +52,10 @@ const App = () => {
                     Ja<span className="highlight">mmm</span>ing
                 </h1>
                 <div className="App">
-                    <SearchBar />
+                    <SearchBar onSearch={searchSpotify} searchBarTerm={searchBarTerm} onSearchTerm={updateSearchBarTerm} />
                     <div className="App-playlist">
                         <SearchResults searchResults={searchResults} onButtonClick={onButtonClick} />
-                        <Playlist playlistTracks={playlistTracks} onButtonClick={onButtonClick} playlistName={playlistName} onNameChange={updatePlaylistName} />
+                        <Playlist playlistTracks={playlistTracks} onButtonClick={onButtonClick} playlistName={playlistName} onNameChange={updatePlaylistName} onSave={savePlaylist} />
                     </div>
                 </div>
             </div>
